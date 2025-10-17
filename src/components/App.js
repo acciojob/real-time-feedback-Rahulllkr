@@ -37,15 +37,15 @@ const App = () => {
 
           <label>Name:</label>
           <input id="name" onChange={(e) => setName(e.target.value)} type="text" value={name} required/>
-          {!name && <p>{nameError}</p>}
+          {!name && <p className="error-message">{nameError}</p>}
 
           <label>Email:</label>
           <input id="email" onChange={(e) => setEmail(e.target.value)} type="email" value={email} required/>
-          {!email && <p>{emailError}</p>}
+          {!email && <p className="error-message">{emailError}</p>}
 
           <label>Password:</label>
           <input id="password" onChange={(e) => setPassword(e.target.value)} minLength={6} type="password"  value={password} required/>
-          {password && <p>{passwordError}</p>}
+          {password && <p className="error-message">{passwordError}</p>}
           
           <button type="submit" onClick={checkInput}>Submit</button>
         </form>
