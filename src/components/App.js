@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './../styles/App.css';
 
 const App = () => {
@@ -10,22 +10,38 @@ const App = () => {
   const [emailError,setEmailError] = useState("")
   const [passwordError,setPasswordError] = useState("")
 
-  const checkInput = () => {
+  useEffect(() => {
+
     if(name === ""){
       setNameError("Name is required")
-      return
+    }else{
+      setNameError("")
     }
+  },[name])
+
+  useEffect(() => {
     if(!email.includes("@")){
       setEmailError("Invalid email formate")
-      return
+    }else{
+      setEmailError("")
     }
-    if(password.length < 6){
+  },[email])
+
+  useEffect(() => {
+    if(password === ""){
+      setPasswordError("Password is required")
+    }else if(password.length <= 6){
       setPasswordError("Password must be atleast 6 character")
+    }else{
+      setPasswordError("")
     }
-  }
+  },[password])
 
   const handleForm = (e) => {
     e.preventDefault()
+    if(!nameError && !emailError && !password){
+      alert("Form submited successfully")
+    }
     setName("")
     setEmail("")
     setPassword("")
@@ -37,17 +53,17 @@ const App = () => {
 
           <label>Name:</label>
           <input id="name" onChange={(e) => setName(e.target.value)} type="text" value={name} required/>
-          {!name && <p className="error-message">{nameError}</p>}
+          {nameError && <p className="error-message">{nameError}</p>}
 
           <label>Email:</label>
           <input id="email" onChange={(e) => setEmail(e.target.value)} type="email" value={email} required/>
-          {!email && <p className="error-message">{emailError}</p>}
+          {emailError  && <p className="error-message">{emailError}</p>}
 
           <label>Password:</label>
           <input id="password" onChange={(e) => setPassword(e.target.value)} minLength={6} type="password"  value={password} required/>
-          {password && <p className="error-message">{passwordError}</p>}
+          {passwordError && <p className="error-message">{passwordError}</p>}
           
-          <button type="submit" onClick={checkInput}>Submit</button>
+          <button type="submit">Submit</button>
         </form>
     </div>
   )
