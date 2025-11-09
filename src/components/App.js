@@ -63,7 +63,7 @@ const App = () => {
           <input id="password" onChange={(e) => setPassword(e.target.value)} minLength={6} type="password"  value={password} required/>
           {passwordError && <p className="error-message">{passwordError}</p>}
           
-          <button type="submit"></button>
+          <button type="submit">Submit</button>
         </form>
     </div>
   )
